@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Book Management System</h1>
+
+    <!-- Forms Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Add Book Form -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Add Book</h2>
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="Title" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="author_id" placeholder="Author ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="category_id" placeholder="Category ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="stock" placeholder="Stock" class="w-full p-2 mb-2 border rounded" required>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Book</button>
+            </form>
+        </div>
+
+        <!-- Add Borrower Form -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Add Borrower</h2>
+            <form id="borrowerForm">
+                <input type="text" id="b_name" placeholder="Name" class="w-full p-2 mb-2 border rounded" required>
+                <input type="email" id="email" placeholder="Email" class="w-full p-2 mb-2 border rounded" required>
+                <input type="text" id="phone" placeholder="Phone" class="w-full p-2 mb-2 border rounded" required>
+                <input type="date" id="join_date" class="w-full p-2 mb-2 border rounded" required>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Borrower</button>
+            </form>
+        </div>
+
+        <!-- Add Transaction Form -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Add Transaction</h2>
+            <form id="transactionForm">
+                <input type="number" id="t_book_id" placeholder="Book ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="t_borrower_id" placeholder="Borrower ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="date" id="borrow_date" class="w-full p-2 mb-2 border rounded" required>
+                <input type="date" id="return_date" class="w-full p-2 mb-2 border rounded">
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Transaction</button>
+            </form>
+        </div>
+
+        <!-- Add Reservation Form -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Add Reservation</h2>
+            <form id="reservationForm">
+                <input type="number" id="r_book_id" placeholder="Book ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="r_borrower_id" placeholder="Borrower ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="date" id="reserve_date" class="w-full p-2 mb-2 border rounded" required>
+                <input type="text" id="status" placeholder="Status" class="w-full p-2 mb-2 border rounded" required>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Reservation</button>
+            </form>
+        </div>
+
+        <!-- Add Review Form -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Add Review</h2>
+            <form id="reviewForm">
+                <input type="number" id="rev_book_id" placeholder="Book ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="rev_borrower_id" placeholder="Borrower ID" class="w-full p-2 mb-2 border rounded" required>
+                <input type="number" id="rating" placeholder="Rating (1-5)" class="w-full p-2 mb-2 border rounded" required>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Books Table -->
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold mb-2">Books List</h2>
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="p-2">Book ID</th>
+                    <th class="p-2">Title</th>
+                    <th class="p-2">Author ID</th>
+                    <th class="p-2">Category ID</th>
+                    <th class="p-2">Stock</th>
+                </tr>
+            </thead>
+            <tbody id="booksTable"></tbody>
+        </table>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

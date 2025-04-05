@@ -1,5 +1,6 @@
 -- Create the database
-CREATE DATABASE book_management;
+-- CREATE DATABASE book_management;
+-- DROP DATABASE book_management;
 USE book_management;
 
 -- Create tables (2 per team member, total 10)
@@ -49,7 +50,7 @@ CREATE TABLE Publishers (
 CREATE TABLE Book_Copies (
     copy_id INT PRIMARY KEY AUTO_INCREMENT,
     book_id INT,
-    condition VARCHAR(50),
+    _condition VARCHAR(50),
     location VARCHAR(50),
     available BOOLEAN
 );
@@ -103,7 +104,7 @@ INSERT INTO Publishers (name, location) VALUES
 ('Scribner', 'New York'),
 ('Secker & Warburg', 'London');
 
-INSERT INTO Book_Copies (book_id, condition, location, available) VALUES
+INSERT INTO Book_Copies (book_id, _condition, location, available) VALUES
 (1, 'Good', 'Shelf A1', TRUE),
 (2, 'Worn', 'Shelf B2', FALSE);
 

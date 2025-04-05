@@ -1,11 +1,15 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const path = require('path'); // Added to handle file paths
 const app = express();
 
 // Middleware to parse JSON and enable CORS
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from the 'frontend' folder
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // MySQL connection
 const db = mysql.createConnection({
@@ -18,6 +22,11 @@ const db = mysql.createConnection({
 db.connect(err => {
     if (err) throw err;
     console.log('Connected to MySQL database');
+});
+
+// Serve the index.html file at the root URL
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // API route to get all books
