@@ -36,7 +36,7 @@ Before running the project, ensure you have the following installed:
 ### 1. Clone the Repository
 If you have Git installed, clone the project to your local machine:
 ```bash
-git clone <repository-url>
+git clone <https://github.com/hridoynasah/ur-book-manager?tab=readme-ov-file>
 cd book-manager
 ```
 Alternatively, download the project files manually and extract them to a folder named `book-manager`.
