@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System - Authentication</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/script.js" defer></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">Book Management System</h1>
+        
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Tab navigation -->
+            <div class="flex border-b border-gray-200">
+                <button id="loginTab" class="w-1/2 py-3 px-6 text-center text-blue-600 bg-white font-medium border-b-2 border-blue-500" onclick="showTab('login')">
+                    Login
+                </button>
+                <button id="signupTab" class="w-1/2 py-3 px-6 text-center text-gray-600 bg-white font-medium" onclick="showTab('signup')">
+                    Sign Up
+                </button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="p-6">
+                <div id="loginMessage" class="mb-4 text-sm text-green-500 hidden">
+                    Signup successful! Please login with your credentials.
+                </div>
+                <div id="loginError" class="mb-4 text-sm text-red-500 hidden">
+                    Invalid username or password. Please try again.
+                </div>
+                <form onsubmit="login(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="login-username">
+                            Username
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="login-username" type="text" placeholder="Username" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="login-password">
+                            Password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="login-password" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            type="submit">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="p-6 hidden">
+                <div id="signupError" class="mb-4 text-sm text-red-500 hidden">
+                    Username or email already exists. Please try again.
+                </div>
+                <form onsubmit="signup(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-username">
+                            Username
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="signup-username" type="text" placeholder="Username" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-email">
+                            Email
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="signup-email" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="signup-password">
+                            Password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="signup-password" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            type="submit">
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
