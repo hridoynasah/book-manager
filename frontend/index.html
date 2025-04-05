@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Management System</title>
+    <title>Book Manager</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/script.js" defer></script>
@@ -17,16 +17,16 @@
                     <!-- Logo and app name -->
                     <div>
                         <a href="#" class="flex items-center py-4 px-2">
-                            <span class="font-bold text-white text-lg">Book Management System</span>
+                            <span class="font-bold text-white text-lg">Book Manager</span>
                         </a>
                     </div>
                     <!-- Navigation links -->
                     <div class="hidden md:flex items-center space-x-1">
-                        <a href="#books-section" class="py-4 px-3 text-white hover:text-blue-200">Books</a>
-                        <a href="#borrowers-section" class="py-4 px-3 text-white hover:text-blue-200">Borrowers</a>
-                        <a href="#transactions-section" class="py-4 px-3 text-white hover:text-blue-200">Transactions</a>
-                        <a href="#reservations-section" class="py-4 px-3 text-white hover:text-blue-200">Reservations</a>
-                        <a href="#reviews-section" class="py-4 px-3 text-white hover:text-blue-200">Reviews</a>
+                        <a href="books.html" class="py-4 px-3 text-white hover:text-blue-200">Books</a>
+                        <a href="borrowers.html" class="py-4 px-3 text-white hover:text-blue-200">Borrowers</a>
+                        <a href="transactions.html" class="py-4 px-3 text-white hover:text-blue-200">Transactions</a>
+                        <a href="reservations.html" class="py-4 px-3 text-white hover:text-blue-200">Reservations</a>
+                        <a href="reviews.html" class="py-4 px-3 text-white hover:text-blue-200">Reviews</a>
                     </div>
                 </div>
                 <!-- Logout button -->
@@ -41,260 +41,171 @@
         <!-- Welcome message -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Welcome, <span id="usernameDisplay">User</span>!</h1>
-            <p class="text-gray-600">Manage your library effectively with our Book Management System.</p>
+            <p class="text-gray-600">Manage your library effectively with our Book Manager.</p>
         </div>
 
-        <!-- Books Section -->
-        <section id="books-section" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Books</h2>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Books Table -->
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
-                            </tr>
-                        </thead>
-                        <tbody id="booksTable" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <!-- Add Book Form -->
-                <div class="p-6 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Book</h3>
-                    <form onsubmit="addBook(event)">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="text" id="title" placeholder="Title" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="author_id">Author ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="author_id" placeholder="Author ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="category_id">Category ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="category_id" placeholder="Category ID" required>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Stock</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="stock" placeholder="Stock" required>
-                        </div>
-                        <div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">Add Book</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Add Books Section -->
+        <section id="add-books-section" class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add Books</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form onsubmit="addBook(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="text" id="title" placeholder="Title" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="author_id">Author ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="author_id" placeholder="Author ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="category_id">Category ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="category_id" placeholder="Category ID" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Stock</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="stock" placeholder="Stock" required>
+                    </div>
+                    <div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">Add Book</button>
+                    </div>
+                </form>
+                <a href="books.html" class="text-blue-500 hover:underline mt-4 block">View Books</a>
             </div>
         </section>
 
-        <!-- Borrowers Section -->
-        <section id="borrowers-section" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Borrowers</h2>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Borrowers Table -->
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Join Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="borrowersTable" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <!-- Add Borrower Form -->
-                <div class="p-6 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Borrower</h3>
-                    <form onsubmit="addBorrower(event)">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="b_name">Name</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="text" id="b_name" placeholder="Name" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="b_email">Email</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="email" id="b_email" placeholder="Email" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="b_phone">Phone</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="text" id="b_phone" placeholder="Phone" required>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="join_date">Join Date</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="date" id="join_date" required>
-                        </div>
-                        <div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">Add Borrower</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Add Borrowers Section -->
+        <section id="add-borrowers-section" class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add Borrowers</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form onsubmit="addBorrower(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="b_name">Name</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="text" id="b_name" placeholder="Name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="b_email">Email</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="email" id="b_email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="b_phone">Phone</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="text" id="b_phone" placeholder="Phone" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="join_date">Join Date</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="date" id="join_date" required>
+                    </div>
+                    <div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">Add Borrower</button>
+                    </div>
+                </form>
+                <a href="borrowers.html" class="text-blue-500 hover:underline mt-4 block">View Borrowers</a>
             </div>
         </section>
 
-        <!-- Transactions Section -->
-        <section id="transactions-section" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Transactions</h2>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Transactions Table -->
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Borrower ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Borrow Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Return Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transactionsTable" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <!-- Add Transaction Form -->
-                <div class="p-6 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Transaction</h3>
-                    <form onsubmit="addTransaction(event)">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="t_book_id">Book ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="t_book_id" placeholder="Book ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="t_borrower_id">Borrower ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="t_borrower_id" placeholder="Borrower ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="borrow_date">Borrow Date</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="date" id="borrow_date" required>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="return_date">Return Date</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="date" id="return_date">
-                        </div>
-                        <div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">Add Transaction</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Add Transactions Section -->
+        <section id="add-transactions-section" class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add Transactions</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form onsubmit="addTransaction(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="t_book_id">Book ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="t_book_id" placeholder="Book ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="t_borrower_id">Borrower ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="t_borrower_id" placeholder="Borrower ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="borrow_date">Borrow Date</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="date" id="borrow_date" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="return_date">Return Date</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="date" id="return_date">
+                    </div>
+                    <div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">Add Transaction</button>
+                    </div>
+                </form>
+                <a href="transactions.html" class="text-blue-500 hover:underline mt-4 block">View Transactions</a>
             </div>
         </section>
 
-        <!-- Reservations Section -->
-        <section id="reservations-section" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Reservations</h2>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Reservations Table -->
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Borrower ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reserve Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reservationsTable" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <!-- Add Reservation Form -->
-                <div class="p-6 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Reservation</h3>
-                    <form onsubmit="addReservation(event)">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="r_book_id">Book ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="r_book_id" placeholder="Book ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="r_borrower_id">Borrower ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="r_borrower_id" placeholder="Borrower ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="reserve_date">Reserve Date</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="date" id="reserve_date" required>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Status</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="text" id="status" placeholder="Status" required>
-                        </div>
-                        <div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">Add Reservation</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Add Reservations Section -->
+        <section id="add-reservations-section" class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add Reservations</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form onsubmit="addReservation(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="r_book_id">Book ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="r_book_id" placeholder="Book ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="r_borrower_id">Borrower ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="r_borrower_id" placeholder="Borrower ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="reserve_date">Reserve Date</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="date" id="reserve_date" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="status">Status</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="text" id="status" placeholder="Status" required>
+                    </div>
+                    <div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">Add Reservation</button>
+                    </div>
+                </form>
+                <a href="reservations.html" class="text-blue-500 hover:underline mt-4 block">View Reservations</a>
             </div>
         </section>
 
-        <!-- Reviews Section -->
-        <section id="reviews-section" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Reviews</h2>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Reviews Table -->
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Borrower ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reviewsTable" class="bg-white divide-y divide-gray-200"></tbody>
-                    </table>
-                </div>
-                <!-- Add Review Form -->
-                <div class="p-6 bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add New Review</h3>
-                    <form onsubmit="addReview(event)">
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="rev_book_id">Book ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="rev_book_id" placeholder="Book ID" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="rev_borrower_id">Borrower ID</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="rev_borrower_id" placeholder="Borrower ID" required>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="rating">Rating</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
-                                type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required>
-                        </div>
-                        <div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">Add Review</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Add Reviews Section -->
+        <section id="add-reviews-section" class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Add Reviews</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form onsubmit="addReview(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="rev_book_id">Book ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="rev_book_id" placeholder="Book ID" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="rev_borrower_id">Borrower ID</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="rev_borrower_id" placeholder="Borrower ID" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="rating">Rating</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-500" 
+                            type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+                    </div>
+                    <div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">Add Review</button>
+                    </div>
+                </form>
+                <a href="reviews.html" class="text-blue-500 hover:underline mt-4 block">View Reviews</a>
             </div>
         </section>
     </div>
