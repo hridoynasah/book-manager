@@ -1,4 +1,4 @@
-# Book Manager Assistant
+# Book Manager
 
 A web-based application for managing books, borrowers, transactions, reservations, and reviews in a library-like system. Built with HTML, Tailwind CSS, JavaScript, Node.js, Express, and MySQL.
 
@@ -42,8 +42,8 @@ Before running the project, ensure you have the following installed:
 ### 1. Clone the Repository
 If you have Git installed, clone the project to your local machine:
 ```bash
-git clone <repository-url>
-cd book-manager-assistant
+git clone <https://github.com/hridoynasah/ur-book-manager>
+cd ur-book-manager
 ```
 Alternatively, download the project files manually and extract them.
 
