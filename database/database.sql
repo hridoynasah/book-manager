@@ -1,5 +1,5 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS book_management;
+-- CREATE DATABASE IF NOT EXISTS book_management;
 SHOW DATABASES;
 USE book_management;
 
@@ -162,4 +162,3 @@ INSERT INTO Reservations (book_id, borrower_id, reserve_date, status) VALUES
 INSERT INTO Reviews (book_id, borrower_id, rating) VALUES
 (1, 1, 5),
 (2, 2, 4);
-SELECT * FROM users;
