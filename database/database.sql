@@ -1,5 +1,5 @@
 -- Create the database
--- CREATE DATABASE IF NOT EXISTS book_management;
+CREATE DATABASE IF NOT EXISTS book_management;
 SHOW DATABASES;
 USE book_management;
 
