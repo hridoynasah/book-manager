@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if ((currentPath === '/auth.html') && isLoggedIn) {
         window.location.href = '/';
         return;
+    } else if (currentPath === '/books.html' && isLoggedIn) {
+        // Ensure we load books when on the books page
+        fetchBooks();
     }
     
     // Set up tab switching in auth.html
@@ -162,30 +165,77 @@ function fetchBooks() {
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('booksTable');
+            if (!tableBody) return; // Exit if not on books page
+            
             tableBody.innerHTML = '';
             
             if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No books found</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No books found</td></tr>';
                 return;
             }
             
             data.forEach(book => {
                 tableBody.innerHTML += `
-                    <tr>
+                    <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap">${book.book_id}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${book.title}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${book.author_id}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${book.category_id}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${book.stock}</td>
-                    </tr>
-                `;
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button onclick="openEditModal(${book.book_id})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded mr-1">
+                                Edit
+                            </button>
+                            <button onclick="openDeleteModal(${book.book_id})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>`;
             });
         })
         .catch(error => {
             console.error('Error fetching books:', error);
             const tableBody = document.getElementById('booksTable');
-            tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">Error loading books</td></tr>';
+            if (tableBody) {
+                tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-red-500">Error loading books</td></tr>';
+            }
         });
+}
+
+// Edit modal functions for books
+function openEditModal(bookId) {
+    fetch(`/books/${bookId}`)
+        .then(response => response.json())
+        .then(book => {
+            document.getElementById('edit_book_id').value = book.book_id;
+            document.getElementById('edit_title').value = book.title;
+            document.getElementById('edit_author_id').value = book.author_id;
+            document.getElementById('edit_category_id').value = book.category_id;
+            document.getElementById('edit_stock').value = book.stock;
+            
+            document.getElementById('editBookModal').classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('Error fetching book details:', error);
+            alert('Error loading book details. Please try again.');
+        });
+}
+
+function closeEditModal() {
+    document.getElementById('editBookModal').classList.add('hidden');
+}
+
+// Delete modal functions for books
+let bookToDelete = null;
+
+function openDeleteModal(bookId) {
+    bookToDelete = bookId;
+    document.getElementById('deleteConfirmModal').classList.remove('hidden');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteConfirmModal').classList.add('hidden');
+    bookToDelete = null;
 }
 
 // Add book
@@ -219,6 +269,75 @@ function addBook(event) {
         alert('Error adding book. Please try again.');
     });
 }
+
+// Event listeners for book edit/delete buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the books page
+    if (window.location.pathname === '/books.html') {
+        // Add event listeners for the edit form submission
+        const editForm = document.getElementById('editBookForm');
+        if (editForm) {
+            editForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const bookId = document.getElementById('edit_book_id').value;
+                const book = {
+                    title: document.getElementById('edit_title').value,
+                    author_id: document.getElementById('edit_author_id').value,
+                    category_id: document.getElementById('edit_category_id').value,
+                    stock: document.getElementById('edit_stock').value
+                };
+                
+                fetch(`/update-book/${bookId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(book)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        closeEditModal();
+                        fetchBooks(); // Refresh the book list
+                        alert('Book updated successfully!');
+                    } else {
+                        alert('Error updating book: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating book:', error);
+                    alert('Error updating book. Please try again.');
+                });
+            });
+        }
+        
+        // Add event listener for the delete button
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        if (confirmDeleteBtn) {
+            confirmDeleteBtn.addEventListener('click', function() {
+                if (!bookToDelete) return;
+                
+                fetch(`/delete-book/${bookToDelete}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    closeDeleteModal();
+                    if (data.success) {
+                        fetchBooks(); // Refresh the book list
+                        alert('Book deleted successfully!');
+                    } else {
+                        alert('Error deleting book: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting book:', error);
+                    alert('Error deleting book. Please try again.');
+                    closeDeleteModal();
+                });
+            });
+        }
+    }
+});
 
 // Fetch and display borrowers
 function fetchBorrowers() {
