@@ -116,6 +116,24 @@ app.get('/books', (req, res) => {
     });
 });
 
+// API route to get a single book by ID
+app.get('/books/:id', (req, res) => {
+    const bookId = req.params.id;
+    const query = 'SELECT * FROM Books WHERE book_id = ?';
+    db.query(query, [bookId], (err, results) => {
+        if (err) {
+            console.error('Database error fetching book:', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: 'Book not found' });
+        }
+        
+        res.json(results[0]);
+    });
+});
+
 // API route to add a book
 app.post('/add-book', (req, res) => {
     const { title, author_id, category_id, stock } = req.body;
@@ -126,6 +144,45 @@ app.post('/add-book', (req, res) => {
             return res.status(500).json({ success: false, message: 'Server error' });
         }
         res.json({ success: true, message: 'Book added' });
+    });
+});
+
+// API route to update a book
+app.put('/update-book/:id', (req, res) => {
+    const bookId = req.params.id;
+    const { title, author_id, category_id, stock } = req.body;
+    const query = 'UPDATE Books SET title = ?, author_id = ?, category_id = ?, stock = ? WHERE book_id = ?';
+    
+    db.query(query, [title, author_id, category_id, stock, bookId], (err, result) => {
+        if (err) {
+            console.error('Database error updating book:', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: 'Book not found' });
+        }
+        
+        res.json({ success: true, message: 'Book updated successfully' });
+    });
+});
+
+// API route to delete a book
+app.delete('/delete-book/:id', (req, res) => {
+    const bookId = req.params.id;
+    const query = 'DELETE FROM Books WHERE book_id = ?';
+    
+    db.query(query, [bookId], (err, result) => {
+        if (err) {
+            console.error('Database error deleting book:', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: 'Book not found' });
+        }
+        
+        res.json({ success: true, message: 'Book deleted successfully' });
     });
 });
 
