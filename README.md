@@ -116,49 +116,49 @@ See the LICENSE file for details.
 
 
 ! Router 1 Configuration
-en
-conf t
-int fa1/0
-ip nat outside
-exit
-int fa0/0
-ip nat inside
-exit
-ip nat inside source static 192.168.10.2 8.0.0.3
-ip nat inside source static 192.168.10.3 8.0.0.4
-ip nat inside source static 192.168.10.4 8.0.0.5
-exit
-show ip nat translations
+en  
+conf t  
+int fa1/0  
+ip nat outside  
+exit  
+int fa0/0  
+ip nat inside  
+exit  
+ip nat inside source static 192.168.10.2 8.0.0.3  
+ip nat inside source static 192.168.10.3 8.0.0.4  
+ip nat inside source static 192.168.10.4 8.0.0.5  
+exit  
+show ip nat translations  
 
-! Router 2 Configuration
-en
-conf t
-int fa1/0
-ip nat outside
-exit
-int fa0/0
-ip nat inside
-exit
-int fa6/0
-ip nat outside
-exit
-access-list 1 permit 192.168.30.0 0.0.0.255
-ip nat pool 1 9.0.0.4 9.0.0.10 netmask 255.0.0.0
-ip nat inside source list 1 pool 1
-exit
-show ip nat statistics
+! Router 2 Configuration  
+en  
+conf t  
+int fa1/0  
+ip nat outside  
+exit  
+int fa0/0  
+ip nat inside  
+exit  
+int fa6/0  
+ip nat outside  
+exit  
+access-list 1 permit 192.168.30.0 0.0.0.255  
+ip nat pool 1 9.0.0.4 9.0.0.10 netmask 255.0.0.0  
+ip nat inside source list 1 pool 1  
+exit  
+show ip nat statistics  
 
-! Router 3 Configuration
-en
-conf t
-int fa1/0
-ip nat outside
-exit
-int fa0/0
-ip nat inside
-exit
-ip nat inside source static 192.168.20.2 9.0.0.3
-exit
-show ip nat translations
+! Router 3 Configuration  
+en  
+conf t  
+int fa1/0  
+ip nat outside  
+exit  
+int fa0/0  
+ip nat inside  
+exit  
+ip nat inside source static 192.168.20.2 9.0.0.3  
+exit  
+show ip nat translations  
 
 
