@@ -112,7 +112,8 @@ Alternatively, download the project files manually and extract them.
 ## License
 See the LICENSE file for details.
 
-Here’s all three router configurations combined into one Markdown code block:
+
+
 
 ! Router 1 Configuration
 en
@@ -160,5 +161,4 @@ ip nat inside source static 192.168.20.2 9.0.0.3
 exit
 show ip nat translations
 
-Let me know if you want this saved as a .md file or need it formatted for Cisco Packet Tracer notes.
 
