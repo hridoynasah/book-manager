@@ -112,10 +112,11 @@ Alternatively, download the project files manually and extract them.
 ## License
 See the LICENSE file for details.
 
-For router 1:
+Here’s all three router configurations combined into one Markdown code block:
 
-en 
-conf t 
+! Router 1 Configuration
+en
+conf t
 int fa1/0
 ip nat outside
 exit
@@ -126,24 +127,10 @@ ip nat inside source static 192.168.10.2 8.0.0.3
 ip nat inside source static 192.168.10.3 8.0.0.4
 ip nat inside source static 192.168.10.4 8.0.0.5
 exit
-show ip nat translations 
+show ip nat translations
 
-For router 3:
-
+! Router 2 Configuration
 en
-conf t
-int fa1/0
-ip nat outside
-exit
-int fa0/0
-ip nat inside
-exit 
-ip nat inside source static 192.168.20.2 9.0.0.3
-exit
-show ip nat translations 
-
-for router 2:
-en 
 conf t
 int fa1/0
 ip nat outside
@@ -159,4 +146,19 @@ ip nat pool 1 9.0.0.4 9.0.0.10 netmask 255.0.0.0
 ip nat inside source list 1 pool 1
 exit
 show ip nat statistics
+
+! Router 3 Configuration
+en
+conf t
+int fa1/0
+ip nat outside
+exit
+int fa0/0
+ip nat inside
+exit
+ip nat inside source static 192.168.20.2 9.0.0.3
+exit
+show ip nat translations
+
+Let me know if you want this saved as a .md file or need it formatted for Cisco Packet Tracer notes.
 
